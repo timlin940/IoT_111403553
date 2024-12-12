@@ -5,7 +5,7 @@ import time
 from gtts import gTTS
 import os
 
-def play_tts(text):
+def play_tts(text):#播放語音
     tts = gTTS(text=text, lang='zh-CN')
     tts.save("alert.mp3")
     os.system("mpg321 alert.mp3")
@@ -15,16 +15,16 @@ play_tts("啟動中")
 # 初始化 OpenVINO
 model_path = "/home/YaHaaaa/Downloads/person-vehicle-bike-detection-crossroad-0078.xml"
 core = Core()
-compiled_model = core.compile_model(model=model_path, device_name="MYRIAD")
+compiled_model = core.compile_model(model=model_path, device_name="MYRIAD")#設定NCS2裝置
 input_layer = compiled_model.input(0)
 output_layer = compiled_model.output(0)
 input_shape = input_layer.shape  # e.g., [1, 3, 300, 300]
 
-object_sizes = {
-    1:("人",1.7),
-    2:("汽車",1.5)
+object_sizes = {#設定物件高度
+    1:("人",1.7),#1.7公尺
+    2:("汽車",1.5)#1.5公尺
     
-} # 添加完整 COCO 類別
+} 
 FOCAL_LENGTH = 300
 last_alert = ""
 # 打開相機
@@ -37,7 +37,7 @@ if not cap.isOpened():
 play_tts("打開相機")
 # 設置時間條件
 last_detection_time = 0
-def calculate_distance(object_height_px, actual_height):
+def calculate_distance(object_height_px, actual_height):#估算距離
     """計算物體與相機的距離"""
     if object_height_px > 0 and actual_height is not None:
         return round((actual_height * FOCAL_LENGTH) / object_height_px)
@@ -51,13 +51,12 @@ try:
             print("無法讀取影像")
             break
 
-        # 模型推論
-        if current_time - last_detection_time > 2:
+        # 模型推論 解省效能  1秒後才推論
+        if current_time - last_detection_time > 1:
             # 調整影像大小並進行預處理
             input_image = cv2.resize(frame, (input_shape[3], input_shape[2]))
             input_image = input_image.transpose(2, 0, 1)  # HWC to CHW
             input_image = np.expand_dims(input_image, axis=0)  # 增加 batch 維度
-            # NONONO!!!! input_image = input_image.astype(np.float32) / 255.0  # 正規化
             results = compiled_model([input_image])[output_layer]
             last_detection_time = current_time
             # 解析推論結果
@@ -67,7 +66,7 @@ try:
             
             for detection in results[0][0]:
                 confidence = detection[2]
-                if confidence > 0.65:  # 信心門檻
+                if confidence > 0.65:  # 信心門檻 
                     xmin, ymin, xmax, ymax = (
                         int(detection[3] * frame.shape[1]),
                         int(detection[4] * frame.shape[0]),
@@ -96,7 +95,7 @@ try:
                     obj_name = object_sizes.get(class_id)  # 取得名稱和大小
                     obj_h = ymax - ymin  # 計算框的高度 (像素)
                     obj_dis = calculate_distance(obj_h, obj_name[1])  # 計算距離
-                    if obj_dis < min_dis:
+                    if obj_dis < min_dis:#判斷距離更近的物體
                         min_dis = obj_dis
                         nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
                 # 添加標註文字 (名稱、信心值和距離)
