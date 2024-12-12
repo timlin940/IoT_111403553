@@ -15,10 +15,10 @@
 <https://hackmd.io/HV6hQ2PHSiWlrRsfxC10SA>
 
 2. 安裝物件辨認模型
-、、、
-wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.bin
-、、、
 
+'''
+wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.bin
+'''
 ## 專案硬件需求
  - Raspiberry pi 4代主機板
  - SD Card 32GB (16GB may work)
