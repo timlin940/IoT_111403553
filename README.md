@@ -14,10 +14,13 @@
 - numpy 1.19.5
 ### 軟體安裝流程
 1.安裝openvino
-'''
- mkdir openvino
- cd openvino
-'''
+
+> mkdir intel
+> cd intel
+> wget https://download.01.org/opencv/2019/openvinotoolkit/R3/l_openvino_toolkit_runtime_raspbian_p_2019.3.334.tgz
+ 
+ sudo apt install cmake
+
 ## 專案硬件需求
 
  - Raspiberry pi 4代主機板
