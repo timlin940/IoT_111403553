@@ -13,12 +13,11 @@
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
 ### 軟體安裝流程
-1.安裝openvino等套件
+1. 安裝openvino等套件
 <https://hackmd.io/HV6hQ2PHSiWlrRsfxC10SA>
-2.
+2. 安裝
 
 ## 專案硬件需求
-
  - Raspiberry pi 4代主機板
  - SD Card 32GB (16GB may work)
  - Raspiberry pi camera
@@ -26,10 +25,4 @@
  - 5v行動電源 1 顆
  - usb-typeC充電線一條
  - 3.5mm耳機一條(喇叭)
-## 安裝步驟
-
-如何架起這個專案?:
-第一步:確保硬件齊全(A functioning Raspberry Pi 4B with 32GB SD Card、cam、NCS2、耳機、行衝)
-第二步:確保環境配置齊全(detail install)
-第三步:下載模型
-第四步:
+## 可以改進的部分
