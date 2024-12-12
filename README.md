@@ -50,18 +50,22 @@
 4. 安裝物件辨識模型：
    ```
    wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.bin
-5. 設定啟動文件:
+5. 設定啟動文件(讓樹梅派一連網、插電就可以用):
 - 編輯啟動腳本：
    ```
     nano /home/user/autostart.sh
 - 在腳本中添加以下內容，將路徑替換為實際路徑：
   ```
   #!/bin/bash
-  source /home/user/openvino_dist/bin/setupvars.sh
-  python3 /path/to/code.py
+  sleep 30  # 等待30秒，確保插電後gTTS來得及連上網路
+  source /home/user/intel/openvino_2022.3.2/setupvars.sh>> /home/user/autostart.log 2>&1
+  python3 /home/user/Python_script/code.py>> /home/user/autostart.log 2>&1
 - 給腳本添加執行權限：
   ```
   chmod +x /home/user/autostart.sh
+- 重啟樹莓派：
+  ```
+  sudo reboot
 ## 專案硬件需求
  - Raspiberry pi 4代主機板
  - SD Card 32GB (16GB may work)
