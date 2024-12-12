@@ -7,16 +7,15 @@
 
 ## 專案軟件需求
 
-- Pytohn 3.7.9
+- Python 3.7.9
 - gTTS 2.5.4
 - Openvino_2022.3.2
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
 ### 軟體安裝流程
-安裝openvino等套件
-
-根據以下網站中的步驟安裝
+1.安裝openvino等套件
 <https://hackmd.io/HV6hQ2PHSiWlrRsfxC10SA>
+2.
 
 ## 專案硬件需求
 
@@ -27,3 +26,10 @@
  - 5v行動電源 1 顆
  - usb-typeC充電線一條
  - 3.5mm耳機一條(喇叭)
+## 安裝步驟
+
+如何架起這個專案?:
+第一步:確保硬件齊全(A functioning Raspberry Pi 4B with 32GB SD Card、cam、NCS2、耳機、行衝)
+第二步:確保環境配置齊全(detail install)
+第三步:下載模型
+第四步:
