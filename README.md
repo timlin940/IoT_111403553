@@ -8,7 +8,11 @@
 ## 專案套件需求
 
 Pytohn 3.7.9
+
 gTTS 2.5.4
+
 Openvino_2022.3.2
+
 OpenCV 4.5.2-openvino
+
 numpy 1.19.5
