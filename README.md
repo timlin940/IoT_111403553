@@ -11,14 +11,20 @@
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
 ### 軟體安裝流程
-1. 安裝CMack、OpenCv、OpenVino等套件
+1. 安裝CMack、OpenCv、OpenVino等套件(再改)
 <https://hackmd.io/HV6hQ2PHSiWlrRsfxC10SA>
 
-2. 安裝物件辨認模型
-
-、、、
+2. 安裝物件辨識模型
 wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.bin
-、、、
+
+3. 設定啟動文件
+3-1 nano /home/user/autostart.sh
+在腳本中添加以下內容，將路徑替換為實際路徑：
+
+3-2
+#!/bin/bash
+source /home/user/openvino_dist/bin/setupvars.sh
+python3 /path/to/code.py
 
 ## 專案硬件需求
  - Raspiberry pi 4代主機板
