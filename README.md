@@ -20,19 +20,22 @@
  [Raspberry Pi OpenVINO 安裝教學](https://hackmd.io/HV6hQ2PHSiWlrRsfxC10SA)
 
 2. 安裝物件辨識模型：
-   ```bash
+   ```
    wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.bin
 
-3. 設定啟動文件
-   、、、bash
+3. 設定啟動文件:
+- 編輯啟動腳本：
+   ```
     nano /home/user/autostart.sh
 
 - 在腳本中添加以下內容，將路徑替換為實際路徑：
-#!/bin/bash
-source /home/user/openvino_dist/bin/setupvars.sh
-python3 /path/to/code.py
+  ```
+  #!/bin/bash
+  source /home/user/openvino_dist/bin/setupvars.sh
+  python3 /path/to/code.py
 - 給腳本添加執行權限：
-chmod +x /home/user/autostart.sh
+  ```
+  chmod +x /home/user/autostart.sh
 
 ## 專案硬件需求
  - Raspiberry pi 4代主機板
