@@ -13,7 +13,7 @@
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
 ### 軟體安裝流程
-安裝openvino
+安裝openvino等套件
 
 根據以下網站中的步驟安裝
 <https://hackmd.io/HV6hQ2PHSiWlrRsfxC10SA>
