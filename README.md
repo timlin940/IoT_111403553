@@ -16,13 +16,28 @@
 - numpy 1.19.5
   
 ### 軟體安裝流程
-1. 安裝CMack、OpenCv、OpenVino等套件(再改)
- [Raspberry Pi OpenVINO 安裝教學](https://hackmd.io/HV6hQ2PHSiWlrRsfxC10SA)
-
-2. 安裝物件辨識模型：
+1. 安裝CMack
+    ```
+    cd ~/
+    wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
+    tar xvzf cmake-3.14.4.tar.gz
+    cd ~/cmake-3.14.4
+    ./bootstrap
+    make -j4
+    sudo make install
+2. 安裝OpenCV
+    ```
+    cd ~/
+    sudo apt install git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libatlas-base-dev python3-scipy
+    git clone --depth 1 --branch 4.5.2-openvino https://github.com/opencv/opencv.git
+    cd opencv && mkdir build && cd build
+    cmake –DCMAKE_BUILD_TYPE=Release –DCMAKE_INSTALL_PREFIX=/usr/local ..
+    make -j4
+    sudo make install
+3. 安裝物件辨識模型：
    ```
    wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.bin
-3. 設定啟動文件:
+4. 設定啟動文件:
 - 編輯啟動腳本：
    ```
     nano /home/user/autostart.sh
