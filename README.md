@@ -12,6 +12,7 @@
 - Openvino_2022.3.2
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
+### 軟體安裝流程
 
 ## 專案硬件需求
 
