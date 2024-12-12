@@ -14,9 +14,10 @@
 - numpy 1.19.5
 ### 軟體安裝流程
 1.安裝openvino
-> mkdir openvino
-> cd openvino
-
+'''
+ mkdir openvino
+ cd openvino
+'''
 ## 專案硬件需求
 
  - Raspiberry pi 4代主機板
