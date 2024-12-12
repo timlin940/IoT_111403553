@@ -13,6 +13,9 @@
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
 ### 軟體安裝流程
+1.安裝openvino
+> mkdir openvino
+> cd openvino
 
 ## 專案硬件需求
 
