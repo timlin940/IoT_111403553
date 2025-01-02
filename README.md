@@ -48,11 +48,8 @@
   ```
   sudo /home/YaHaaaa/intel/openvino_2022.3.2/install_dependencies/install_NCS_udev_rules.sh
 
-4. 安裝物件辨識模型：這邊建議先在筆電下載、轉換ssdlite_mobilenet_v2模型 [ssdlite_mobilenet_v2](https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/public/ssdlite_mobilenet_v2/README.md)
-   ```
-  
-
-   wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.xml
+4. 安裝物件辨識模型：這邊建議先在筆電下載、google colab轉換ssdlite_mobilenet_v2模型，避免樹梅派環境衝突 [ssdlite_mobilenet_v2](https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/public/ssdlite_mobilenet_v2/README.md)
+[轉換時需要使用 OpenVINO Model Optimizer]()
 5. 設定啟動文件(讓樹梅派一連網、插電就可以用):
 - 編輯啟動腳本：
    ```
@@ -62,7 +59,7 @@
   #!/bin/bash
   sleep 30  # 等待30秒，確保插電後gTTS來得及連上網路
   source /home/user/intel/openvino_2022.3.2/setupvars.sh>> /home/user/autostart.log 2>&1
-  python3 /home/user/Python_script/code.py>> /home/user/autostart.log 2>&1
+  python3 /home/user/IoT_final/voice_controal.py>> /home/user/autostart.log 2>&1
 - 給腳本添加執行權限：
   ```
   chmod +x /home/user/autostart.sh
@@ -76,7 +73,8 @@
  - NCS2 神經運算棒
  - 5v行動電源 1 顆
  - usb-typeC充電線一條
- - 3.5mm耳機一條(喇叭)
+ - usb麥克風
+ - 電腦音箱(3.5mm插孔)
 ## 裝置照片
 
 ## 可以改進的部分
