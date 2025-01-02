@@ -39,9 +39,9 @@
             frame_count+=1
             if frame_count % frame_skip != 0:
                 continue
-- 如果鏡頭前同時出現許多人、車，該程式碼會優先判斷距離近的
+- 如果鏡頭前同時出現許多人、車，該程式碼會優先產生距離近的文字搞
     ```
-    min_dis = 0
+    min_dis = 1.5
     for detection in detections:
     ....
     if obj_dis < min_dis: #選擇距離近的
