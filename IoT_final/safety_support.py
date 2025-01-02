@@ -18,7 +18,7 @@ def calculate_distance(object_height_px, actual_height,FOCAL_LENGTH):
 def start():
     object_sizes = {
     1:("人",1.6),
-    2:("汽車",1.4)
+    2:("汽車",1.5)
     
     } # 添加完整 COCO 類別
     FOCAL_LENGTH = 200
