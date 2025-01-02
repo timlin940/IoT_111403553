@@ -4,7 +4,7 @@
 ---
 
 ## 專案簡介
-這個裝置利用樹梅派(Raspberry pi)代替使用者的眼睛，幫助盲人可以更加清楚的感知周遭的人、車等物品。裝置考慮到使用者的不方便，所以只需要確保裝置連上網、插上電，裝置就會開始運作。
+這個裝置利用樹梅派(Raspberry pi)代替使用者的眼睛，幫助盲人可以更加清楚的感知周遭人、車的距離。裝置考慮到使用者的不方便，所以只需要確保裝置連上網、插上電，裝置就會開始運作。
 
 ---
 
@@ -14,7 +14,8 @@
 - Openvino_2022.3.2
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
-  
+- ssdlite_mobilenet_v2/FP32(將模型轉換成openvino的格式)
+- 
 ### 軟體安裝流程
 1. 安裝CMack
     ```
@@ -47,9 +48,9 @@
   ```
   sudo /home/YaHaaaa/intel/openvino_2022.3.2/install_dependencies/install_NCS_udev_rules.sh
 
-4. 安裝物件辨識模型：
+4. 安裝物件辨識模型：這邊建議先在筆電下載、轉換ssdlite_mobilenet_v2模型 [ssdlite_mobilenet_v2](https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/public/ssdlite_mobilenet_v2/README.md)
    ```
-   wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.bin
+  
 
    wget https://download.01.org/opencv/2021/openvinotoolkit/2021.2/open_model_zoo/models_bin/3/person-vehicle-bike-detection-crossroad-0078/FP16/person-vehicle-bike-detection-crossroad-0078.xml
 5. 設定啟動文件(讓樹梅派一連網、插電就可以用):
