@@ -20,6 +20,7 @@
 - 會將偵測到的物體名稱、距離整合成一個簡短的文字稿並傳給voice_output(輸出語音)
 - 一旦偵測到人、車，該程式碼會依據現實高度(預設人:1.6公尺，車:1.5公尺) X 相機焦距(設為200) / 偵測到的像素高度(px) = 距離估計(公尺)
     ```
+    obj_dis = calculate_distance(obj_h, obj_name[1],FOCAL_LENGTH)  # 計算距離
    def calculate_distance(object_height_px, actual_height,FOCAL_LENGTH):
     """計算物體與相機的距離"""
     if object_height_px > 0 and actual_height is not None:
@@ -37,7 +38,15 @@
                 break
             frame_count+=1
             if frame_count % frame_skip != 0:
-                continue 
+                continue
+- 如果鏡頭前同時出現許多人、車，該程式碼會優先判斷距離近的
+    ```
+    min_dis = 0
+    for detection in detections:
+    ....
+    if obj_dis < min_dis: #選擇距離近的
+        min_dis = obj_dis
+        nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
 ---
 
 ## 專案軟件需求
