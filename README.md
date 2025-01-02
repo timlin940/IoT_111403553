@@ -5,19 +5,39 @@
 
 ## 專案簡介
 這個裝置利用樹梅派(Raspberry pi)代替使用者的眼睛，幫助盲人可以更加清楚的感知周遭人、車的距離。裝置考慮到使用者的不方便，所以只需要確保裝置連上網、插上電，裝置就會開始運作。
-該裝置根據使用方式大致可以分成語音指令區、行人輔助區、報平安區、物件偵測區。
+該裝置根據使用方式大致可以分成語音指令區、行人輔助區、報平安區。
 
 ## 程式碼功能介紹
 1. voice_controal:
 - 該程式碼負責處理盲人使用者的語音指令，根據對應到的語音切換至不同功能區域:
     - 啟動/關閉行人輔助(進入safety_support)
-    - 啟動/關閉物件偵測(進入object_detect)
     - 我出發了/我已經安全到達(進入sending_Line)
-- 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support和object_detect時，需要用thread(並行序列)來保證不會阻擋語音指令功能
+- 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support，需要用thread(並行序列)來保證不會阻擋語音指令功能
     ```
     threading.Thread(target=run_safety_support, daemon=True).start()  # 啟動safety_support的序列 
 2. safety_support:
-- 該程式碼負責主要的辨認人、車並計算距離。
+- 該程式碼負責的辨認人、車並計算距離，是該裝置的核心。
+- 會將偵測到的物體名稱、距離整合成一個簡短的文字稿並傳給voice_output(輸出語音)
+- 一旦偵測到人、車，該程式碼會依據現實高度(預設人:1.6公尺，車:1.5公尺) X 相機焦距(設為200) / 偵測到的像素高度(px) = 距離估計(公尺)
+    ```
+   def calculate_distance(object_height_px, actual_height,FOCAL_LENGTH):
+    """計算物體與相機的距離"""
+    if object_height_px > 0 and actual_height is not None:
+        return round((actual_height * FOCAL_LENGTH) / object_height_px)
+    return -1  # 無法計算距離
+- 影像的部分設定成每5個frame後再推論，這樣可以有效的降低推理的frame太舊的情況發生。注:如果每個frame都給模型推論，就會出現:當裝置偵測到人後，即使使用者立刻把鏡頭蓋住，但是語音卻不斷說裝置偵測到人，這是因為一瞬間推理了許多frame並生成許多文字稿給voice_output，導致推理結果和語音輸出堆積，產生延遲的結果。
+    ```
+    frame_skip = 5 # 5個frame後再推論
+    frame_count = 0
+    while running:
+            ret, frame = cap.read()
+            current_time = time.time()
+            if not ret:
+                print("無法讀取影像")
+                break
+            frame_count+=1
+            if frame_count % frame_skip != 0:
+                continue 
 ---
 
 ## 專案軟件需求
@@ -95,3 +115,4 @@
 ## 影片demo
 
 ## 參考網址
+[估算距離公式](https://blog.cavedu.com/2019/07/04/distance-of-the-person/)
