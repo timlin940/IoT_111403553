@@ -12,7 +12,7 @@
 - 該程式碼負責處理盲人使用者的語音指令，根據對應到的語音切換至不同功能區域:
     - 啟動/關閉行人輔助(進入safety_support)
     - 我出發了/我已經安全到達(進入sending_Line)
-- 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support，需要用thread(並行序列)來保證不會阻擋語音指令功能
+- 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support時，需要用thread(並行序列)來保證不會阻擋語音指令功能
     ```
     threading.Thread(target=run_safety_support, daemon=True).start()  # 啟動safety_support的序列 
 2. safety_support:
@@ -39,9 +39,10 @@
             frame_count+=1
             if frame_count % frame_skip != 0:
                 continue
-- 如果鏡頭前同時出現許多人、車，該程式碼會優先產生距離近的文字搞
+- 如果鏡頭前同時出現許多人、車，該程式碼會優先產生距離最近的文字搞
     ```
-    min_dis = 1.5
+    nearest_alert = None
+    min_dis = float('inf') #正無窮大
     for detection in detections:
     ....
     if obj_dis < min_dis: #選擇距離近的
