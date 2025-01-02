@@ -83,7 +83,7 @@ def start():
                         detections.append((class_id, confidence, xmin, ymin, xmax, ymax))
                 # 將偵測結果可視化
                 nearest_alert = None
-                min_dis = 0
+                min_dis = float('inf') #正無窮大
                 for detection in detections:
                     class_id, confidence, xmin, ymin, xmax, ymax = detection
                     # 計算邊界框的中心點
