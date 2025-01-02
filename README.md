@@ -16,7 +16,7 @@
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
 - ssdlite_mobilenet_v2/FP32(將模型轉換成openvino的格式)
-- 
+
 ### 軟體安裝流程
 1. 安裝CMack
     ```
