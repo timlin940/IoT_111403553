@@ -14,6 +14,8 @@
     - 啟動/關閉物件偵測(進入object_detect)
     - 我出發了/我已經安全到達(進入sending_Line)
 - 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support和object_detect時，需要用thread(並行序列)來保證不會阻擋語音指令功能
+    ```
+    threading.Thread(target=run_safety_support, daemon=True).start()  # 啟動safety_support的序列 
 2. safety_support:
 - 該程式碼負責主要的辨認人、車並計算距離。
 ---
