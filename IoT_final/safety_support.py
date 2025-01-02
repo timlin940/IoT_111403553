@@ -110,7 +110,7 @@ def start():
                     last_alert = nearest_alert
             
 def stop():
-    global compiled_model  # 声明为全局变量
+    global compiled_model  # 確立為全域變數
     global running
     global cap
     running = False
