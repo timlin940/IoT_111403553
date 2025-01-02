@@ -45,9 +45,11 @@
     min_dis = float('inf') #正無窮大
     for detection in detections:
     ....
-    if obj_dis < min_dis: #選擇距離近的
-        min_dis = obj_dis
-        nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
+        if obj_dis < min_dis: #選擇距離近的
+            min_dis = obj_dis
+            nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
+- 自訂一個stop()，用來關閉相機、NCS2等等資源
+  
 ---
 
 ## 專案軟件需求
