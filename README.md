@@ -49,8 +49,8 @@
   sudo /home/YaHaaaa/intel/openvino_2022.3.2/install_dependencies/install_NCS_udev_rules.sh
 
 4. 安裝物件辨識模型：這邊建議先在筆電下載、google colab轉換ssdlite_mobilenet_v2模型，避免樹梅派環境衝突 [ssdlite_mobilenet_v2](https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/public/ssdlite_mobilenet_v2/README.md)
-[轉換時需要使用 OpenVINO Model Optimizer]()
-5. 設定啟動文件(讓樹梅派一連網、插電就可以用):
+5. [轉換時需要使用 OpenVINO Model Optimizer](https://medium.com/ching-i/intel-openvino-%E6%A8%A1%E5%9E%8B%E8%BD%89%E6%8F%9B-tensorflow-darknet-yolo-onnx-cfc9f2260e7f)
+6. 設定啟動文件(讓樹梅派一連網、插電就可以用):
 - 編輯啟動腳本：
    ```
     nano /home/user/autostart.sh
