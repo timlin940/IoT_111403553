@@ -52,7 +52,12 @@
 3. sending_Line(報平安區):
 - 該功能主要是作為可持續追蹤、紀錄現在這位盲人使用者的狀態，透過使用者傳Line的方式確保使用者是否出發/安全抵達。
 4. voice_output:
-- 利用gTTS將傳入的文字稿轉換成中文語音
+- 利用gTTS將傳入的文字稿轉換成中文語音，最終刪除音檔
+    ```
+    tts.save("alert.mp3")
+    os.system("mpg321 alert.mp3")
+    os.remove("alert.mp3")
+
 ## 示意圖
 ![程式碼執行示意圖](程式碼執行示意圖.png)
 ---
