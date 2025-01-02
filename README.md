@@ -8,14 +8,14 @@
 該裝置根據使用方式大致可以分成語音指令區、行人輔助區、報平安區。
 
 ## 程式碼功能介紹
-1. voice_controal:
-- 該程式碼負責處理盲人使用者的語音指令，根據對應到的語音切換至不同功能區域:
+1. voice_controal(語音指令區):
+- 該程式碼使用usb麥克風並負責處理盲人使用者的語音指令，根據對應到的語音切換至不同功能區域:
     - 啟動/關閉行人輔助(進入safety_support)
     - 我出發了/我已經安全到達(進入sending_Line)
 - 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support時，需要用thread(並行序列)來保證不會阻擋語音指令功能
     ```
     threading.Thread(target=run_safety_support, daemon=True).start()  # 啟動safety_support的序列 
-2. safety_support:
+2. safety_support(行人輔助區):
 - 該程式碼負責的辨認人、車並計算距離，是該裝置的核心。
 - 會將偵測到的物體名稱、距離整合成一個簡短的文字稿並傳給voice_output(輸出語音)
 - 一旦偵測到人、車，該程式碼會依據現實高度(預設人:1.6公尺，車:1.5公尺) X 相機焦距(設為200) / 偵測到的像素高度(px) = 距離估計(公尺)
@@ -48,8 +48,11 @@
         if obj_dis < min_dis: #選擇距離近的
             min_dis = obj_dis
             nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
-- 自訂一個stop()，用來關閉相機、NCS2等等資源
-  
+- 最後自訂一個stop()，用來關閉相機、NCS2等等資源
+3. sending_Line(報平安區):
+- 該功能主要是作為可持續追蹤、紀錄現在這位盲人使用者的狀態，透過使用者傳Line的方式確保使用者是否出發/安全抵達。
+4. voice_output:
+- 利用gTTS將傳入的文字稿轉換成中文語音
 ---
 
 ## 專案軟件需求
