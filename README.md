@@ -159,6 +159,6 @@
 ## 裝置照片
 
 ## 影片demo
-![影片demo](https://studio.youtube.com/video/x_t_HDDhLwU/edit)
+[影片demo](https://studio.youtube.com/video/x_t_HDDhLwU/edit)
 ## 參考網址
 [估算距離公式](https://blog.cavedu.com/2019/07/04/distance-of-the-person/)
