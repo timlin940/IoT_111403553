@@ -52,7 +52,7 @@
 - 最後自訂一個stop()，用來關閉相機、NCS2等等資源
     ```
     def stop():
-        global compiled_model  # 声明为全局变量
+        global compiled_model 
         global running
         global cap
         running = False
