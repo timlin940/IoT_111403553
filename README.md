@@ -78,6 +78,7 @@
         requests.post("https://notify-api.line.me/api/notify",
             headers = headers, data = data)
         return
+- [傳送Line圖示](image/傳送Line訊息.png)
 4. voice_output:
 - 利用gTTS將傳入的文字稿轉換成中文語音，最終由os撥放、刪除音檔
     ```
