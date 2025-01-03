@@ -127,8 +127,9 @@
     make -j4
     sudo make install
 3. 安裝OpenVino(如果指令不行，可以上網下載)
-    ```
-      wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2022.3.2/l_openvino_toolkit_debian9_2022.3.2.9279.e2c7e4d7b4d_armhf.tgz
+   ```
+   wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2022.3.2/l_openvino_toolkit_debian9_2022.3.2.9279.e2c7e4d7b4d_armhf.tgz
+
 - 解壓縮((如果指令不行，可以手動解壓縮)
   ```
   tar -xvf l_openvino_toolkit_debian9_2022.3.2.9279.e2c7e4d7b4d_armhf.tgz 
