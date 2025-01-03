@@ -17,7 +17,7 @@
     ```
     threading.Thread(target=run_safety_support, daemon=True).start()  # 啟動safety_support的序列 
 2. safety_support(行人輔助區):
-- 該程式碼負責的辨認人、車並計算距離，是該裝置的核心。
+- 該程式碼負責辨認人、車並計算距離，是該裝置的核心。
 - 會將偵測到的物體名稱、距離整合成一個簡短的文字稿並傳給voice_output(輸出語音)
 - 一旦偵測到人、車，該程式碼會依據現實高度(預設人:1.6公尺，車:1.5公尺) X 相機焦距(設為200) / 偵測到的像素高度(px) = 距離估計(公尺)
     ```
