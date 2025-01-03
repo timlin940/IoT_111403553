@@ -49,8 +49,34 @@
             min_dis = obj_dis
             nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
 - 最後自訂一個stop()，用來關閉相機、NCS2等等資源
+    ```
+    def stop():
+        global compiled_model  # 声明为全局变量
+        global running
+        global cap
+        running = False
+        if cap is not None:
+            cap.release()
+            cap = None
+        cv2.destroyAllWindows()
+        if compiled_model is not None:
+            del compiled_model #刪除編譯模型
+            complied_model = None
 3. sending_Line(報平安區):
 - 該功能主要是作為可持續追蹤、紀錄現在這位盲人使用者的狀態，透過使用者傳Line的方式確保使用者是否出發/安全抵達。
+    ```
+    import requests
+    def sending(message):
+        # LINE Notify 權杖
+        token = 'YOVvCxxm1zlCP3dr3zTEl0brQTTFgFcfRi4oaHBR0MV'
+        # 要發送的訊息
+        # HTTP 標頭參數與資料
+        headers = { "Authorization": "Bearer " + token }
+        data = { 'message': message }
+        # 以 requests 發送 POST 請求
+        requests.post("https://notify-api.line.me/api/notify",
+            headers = headers, data = data)
+        return
 4. voice_output:
 - 利用gTTS將傳入的文字稿轉換成中文語音，最終由os撥放、刪除音檔
     ```
