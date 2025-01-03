@@ -49,6 +49,12 @@
         if obj_dis < min_dis: #選擇距離近的
             min_dis = obj_dis
             nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
+- 為了避免對一樣的物件生成重複的語音文字稿，對照前一個文字稿進行判斷
+    ```
+    if nearest_alert and nearest_alert != last_alert:
+    print(nearest_alert)
+    vo.play_tts(nearest_alert)
+    last_alert = nearest_alert
 - 最後自訂一個stop()，用來關閉相機、NCS2等等資源
     ```
     def stop():
