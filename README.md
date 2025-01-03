@@ -180,3 +180,4 @@
 - [openvino轉換模型](https://medium.com/ching-i/intel-openvino-%E6%A8%A1%E5%9E%8B%E8%BD%89%E6%8F%9B-tensorflow-darknet-yolo-onnx-cfc9f2260e7f)
 - [Line的權杖設定](https://yaocaptain.com/p/python-line-notify/)
 - [語音輸入](https://ithelp.ithome.com.tw/m/articles/10308396)
+- [模型資訊](https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/public/ssdlite_mobilenet_v2/README.md)
