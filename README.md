@@ -10,89 +10,89 @@
 ![裝置](image/完整裝置照片.jpg)
 ## 程式碼功能介紹
 1. voice_controal(語音指令區):
-- 該程式碼使用usb麥克風並負責處理盲人使用者的語音指令，根據對應到的語音切換至不同功能區域:
-    - 啟動/關閉行人輔助(進入safety_support)
-    - 我出發了/我已經安全到達(進入sending_Line)
-- 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support時，需要用thread(並行序列)來保證不會阻擋語音指令功能
-    ```
-    threading.Thread(target=run_safety_support, daemon=True).start()  # 啟動safety_support的序列
-- usb麥克風![usb](image/usb麥克風.png)
+    - 該程式碼使用usb麥克風並負責處理盲人使用者的語音指令，根據對應到的語音切換至不同功能區域:
+        - 啟動/關閉行人輔助(進入safety_support)
+        - 我出發了/我已經安全到達(進入sending_Line)
+    - 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support時，需要用thread(並行序列)來保證不會阻擋語音指令功能
+        ```
+        threading.Thread(target=run_safety_support, daemon=True).start()  # 啟動safety_support的序列
+    - usb麥克風![usb](image/usb麥克風.png)
 2. safety_support(行人輔助區):
-- 該程式碼負責辨認人、車並計算距離，是該裝置的核心。
-- 會將偵測到的物體名稱、距離整合成一個簡短的文字稿並傳給voice_output(輸出語音)
-- 一旦偵測到人、車，該程式碼會依據現實高度(預設人:1.6公尺，車:1.5公尺) X 相機焦距(設為200) / 偵測到的像素高度(px) = 距離估計(公尺)
-    ```
-    obj_dis = calculate_distance(obj_h, obj_name[1],FOCAL_LENGTH)  # 計算距離
-   def calculate_distance(object_height_px, actual_height,FOCAL_LENGTH):
-    """計算物體與相機的距離"""
-    if object_height_px > 0 and actual_height is not None:
-        return round((actual_height * FOCAL_LENGTH) / object_height_px)
-    return -1  # 無法計算距離
-- 影像的部分設定成每5個frame後再推論，這樣可以有效的降低推理的frame太舊的情況發生。注:如果每個frame都給模型推論，就會出現:當裝置偵測到人後，即使使用者立刻把鏡頭蓋住，但是語音卻不斷說裝置偵測到人，這是因為一瞬間推理了許多frame並生成許多文字稿給voice_output，導致推理結果和語音輸出堆積，產生延遲的結果。
-    ```
-    frame_skip = 5 # 5個frame後再推論
-    frame_count = 0
-    while running:
-            ret, frame = cap.read()
-            current_time = time.time()
-            if not ret:
-                print("無法讀取影像")
-                break
-            frame_count+=1
-            if frame_count % frame_skip != 0:
-                continue
-- 如果鏡頭前同時出現許多人、車，該程式碼會優先產生距離最近的文字搞
-    ```
-    nearest_alert = None
-    min_dis = float('inf') #正無窮大
-    for detection in detections:
-    ....
-        if obj_dis < min_dis: #選擇距離近的
-            min_dis = obj_dis
-            nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
-- 為了避免對一樣的物件生成重複的語音文字稿，對照前一個文字稿進行判斷
-    ```
-    if nearest_alert and nearest_alert != last_alert:
-    print(nearest_alert)
-    vo.play_tts(nearest_alert)
-    last_alert = nearest_alert
-- 最後自訂一個stop()，用來關閉相機、NCS2等等資源
-    ```
-    def stop():
-        global compiled_model 
-        global running
-        global cap
-        running = False
-        if cap is not None:
-            cap.release()
-            cap = None
-        cv2.destroyAllWindows()
-        if compiled_model is not None:
-            del compiled_model #刪除編譯模型
-            complied_model = None
+    - 該程式碼負責辨認人、車並計算距離，是該裝置的核心。
+    - 會將偵測到的物體名稱、距離整合成一個簡短的文字稿並傳給voice_output(輸出語音)
+    - 一旦偵測到人、車，該程式碼會依據現實高度(預設人:1.6公尺，車:1.5公尺) X 相機焦距(設為200) / 偵測到的像素高度(px) = 距離估計(公尺)
+        ```
+        obj_dis = calculate_distance(obj_h, obj_name[1],FOCAL_LENGTH)  # 計算距離
+       def calculate_distance(object_height_px, actual_height,FOCAL_LENGTH):
+        """計算物體與相機的距離"""
+        if object_height_px > 0 and actual_height is not None:
+            return round((actual_height * FOCAL_LENGTH) / object_height_px)
+        return -1  # 無法計算距離
+    - 影像的部分設定成每5個frame後再推論，這樣可以有效的降低推理的frame太舊的情況發生。注:如果每個frame都給模型推論，就會出現:當裝置偵測到人後，即使使用者立刻把鏡頭蓋住，但是語音卻不斷說裝置偵測到人，這是因為一瞬間推理了許多frame並生成許多文字稿給voice_output，導致推理結果和語音輸出堆積，產生延遲的結果。
+        ```
+        frame_skip = 5 # 5個frame後再推論
+        frame_count = 0
+        while running:
+                ret, frame = cap.read()
+                current_time = time.time()
+                if not ret:
+                    print("無法讀取影像")
+                    break
+                frame_count+=1
+                if frame_count % frame_skip != 0:
+                    continue
+    - 如果鏡頭前同時出現許多人、車，該程式碼會優先產生距離最近的文字搞
+        ```
+        nearest_alert = None
+        min_dis = float('inf') #正無窮大
+        for detection in detections:
+        ....
+            if obj_dis < min_dis: #選擇距離近的
+                min_dis = obj_dis
+                nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
+    - 為了避免對一樣的物件生成重複的語音文字稿，對照前一個文字稿進行判斷
+        ```
+        if nearest_alert and nearest_alert != last_alert:
+        print(nearest_alert)
+        vo.play_tts(nearest_alert)
+        last_alert = nearest_alert
+    - 最後自訂一個stop()，用來關閉相機、NCS2等等資源
+        ```
+        def stop():
+            global compiled_model 
+            global running
+            global cap
+            running = False
+            if cap is not None:
+                cap.release()
+                cap = None
+            cv2.destroyAllWindows()
+            if compiled_model is not None:
+                del compiled_model #刪除編譯模型
+                complied_model = None
 3. sending_Line(報平安區):
-- 該功能主要是作為可持續追蹤、紀錄現在這位盲人使用者的狀態，透過使用者傳Line給綁定用戶的方式確保使用者是否出發/安全抵達。
-    ```
-    import requests
-    def sending(message):
-        # LINE Notify 權杖
-        token = 'YOVvCxxm1zlCP3dr3zTEl0brQTTFgFcfRi4oaHBR0MV'
-        # 要發送的訊息
-        # HTTP 標頭參數與資料
-        headers = { "Authorization": "Bearer " + token }
-        data = { 'message': message }
-        # 以 requests 發送 POST 請求
-        requests.post("https://notify-api.line.me/api/notify",
-            headers = headers, data = data)
-        return
-- ![傳送Line圖示](image/傳送Line訊息.png)
+    - 該功能主要是作為可持續追蹤、紀錄現在這位盲人使用者的狀態，透過使用者傳Line給綁定用戶的方式確保使用者是否出發/安全抵達。
+        ```
+        import requests
+        def sending(message):
+            # LINE Notify 權杖
+            token = 'YOVvCxxm1zlCP3dr3zTEl0brQTTFgFcfRi4oaHBR0MV'
+            # 要發送的訊息
+            # HTTP 標頭參數與資料
+            headers = { "Authorization": "Bearer " + token }
+            data = { 'message': message }
+            # 以 requests 發送 POST 請求
+            requests.post("https://notify-api.line.me/api/notify",
+                headers = headers, data = data)
+            return
+    - ![傳送Line圖示](image/傳送Line訊息.png)
 4. voice_output:
-- 利用gTTS將傳入的文字稿轉換成中文語音，最終由os撥放、刪除音檔
-    ```
-    tts = gTTS(text=text, lang='zh-TW')
-    tts.save("alert.mp3")
-    os.system("mpg321 alert.mp3")
-    os.remove("alert.mp3")
+    - 利用gTTS將傳入的文字稿轉換成中文語音，最終由os撥放、刪除音檔
+        ```
+        tts = gTTS(text=text, lang='zh-TW')
+        tts.save("alert.mp3")
+        os.system("mpg321 alert.mp3")
+        os.remove("alert.mp3")
 
 ## 示意圖
 ![程式碼執行示意圖](image/程式碼執行示意圖.png)
