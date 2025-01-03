@@ -171,3 +171,4 @@
 - [行人輔助區_距離估算展示](https://youtube.com/shorts/be-8oqUC6o8)
 ## 參考網址
 [估算距離公式](https://blog.cavedu.com/2019/07/04/distance-of-the-person/)
+[openvino轉換模型](https://medium.com/ching-i/intel-openvino-%E6%A8%A1%E5%9E%8B%E8%BD%89%E6%8F%9B-tensorflow-darknet-yolo-onnx-cfc9f2260e7f)
