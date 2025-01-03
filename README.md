@@ -157,6 +157,8 @@
  - usb-typeC充電線一條
  - usb麥克風
  - 電腦音箱(3.5mm插孔)
+## 可以改進的地方
+- sending_Line目前只能傳訊息，可以加上接收訊息的部分，再透過voice_output輸出
 ## 影片demo
 [影片demo](https://studio.youtube.com/video/x_t_HDDhLwU/edit)
 ## 參考網址
