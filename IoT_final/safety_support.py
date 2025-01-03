@@ -101,7 +101,7 @@ def start():
                         obj_name = object_sizes.get(class_id)  # 取得名稱和大小
                         obj_h = ymax - ymin  # 計算框的高度 (像素)
                         obj_dis = calculate_distance(obj_h, obj_name[1],FOCAL_LENGTH)  # 計算距離
-                        if obj_dis < min_dis:
+                        if obj_dis < min_dis:#優先生成距離最近的物件語音
                             min_dis = obj_dis
                             nearest_alert = f"有{obj_name[0]}在{position}, 距離約 {obj_dis:.2f} 公尺"
                 if nearest_alert and nearest_alert != last_alert:
