@@ -97,12 +97,13 @@
 ![程式碼執行示意圖](image/程式碼執行示意圖.png)
 ---
 
-## 專案軟件需求
+## 專案軟體需求
 - Python 3.7.9
 - gTTS 2.5.4
 - Openvino_2022.3.2
 - OpenCV 4.5.2-openvino
 - numpy 1.19.5
+- SpeechRecognition
 - ssdlite_mobilenet_v2/FP32(將模型轉換成openvino的格式)
 
 ### 軟體安裝流程
@@ -155,7 +156,7 @@
 - 重啟樹莓派：
   ```
   sudo reboot
-## 專案硬件需求
+## 專案硬體需求
  - Raspiberry pi 4代主機板
  - SD Card 32GB (16GB may work)
  - Raspiberry pi camera
@@ -166,9 +167,13 @@
  - 電腦音箱(3.5mm插孔)
 ## 可以改進的地方
 - sending_Line目前只能傳訊息，可以加上接收訊息的部分，再透過voice_output輸出
+- 裝置的外型太簡略，可以再優化
+
 ## 影片demo
 - [語音功能、sending_Line功能展示](https://studio.youtube.com/video/x_t_HDDhLwU/edit)
 - [行人輔助區_距離估算展示](https://youtube.com/shorts/be-8oqUC6o8)
 ## 參考網址
 [估算距離公式](https://blog.cavedu.com/2019/07/04/distance-of-the-person/)
 [openvino轉換模型](https://medium.com/ching-i/intel-openvino-%E6%A8%A1%E5%9E%8B%E8%BD%89%E6%8F%9B-tensorflow-darknet-yolo-onnx-cfc9f2260e7f)
+[Line的權杖設定](https://yaocaptain.com/p/python-line-notify/)
+[語音輸入](https://ithelp.ithome.com.tw/m/articles/10308396)
