@@ -16,7 +16,7 @@
 - 語音指令是一直在運行的，不論進到哪個程式碼!因此執行safety_support時，需要用thread(並行序列)來保證不會阻擋語音指令功能
     ```
     threading.Thread(target=run_safety_support, daemon=True).start()  # 啟動safety_support的序列
-- [usb](image/usb麥克風jpg)
+- ![usb](image/usb麥克風.jpg)
 2. safety_support(行人輔助區):
 - 該程式碼負責辨認人、車並計算距離，是該裝置的核心。
 - 會將偵測到的物體名稱、距離整合成一個簡短的文字稿並傳給voice_output(輸出語音)
