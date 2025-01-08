@@ -174,7 +174,7 @@
 - 裝置的外型太簡略，可以再優化
 
 ## 影片demo
-- [語音功能、sending_Line功能展示](https://studio.youtube.com/video/x_t_HDDhLwU/edit)
+- [語音功能、sending_Line功能展示](https://www.youtube.com/watch?v=x_t_HDDhLwU)
 - [行人輔助區_距離估算展示](https://youtube.com/shorts/be-8oqUC6o8)
 ## 參考網址
 - [估算距離公式](https://blog.cavedu.com/2019/07/04/distance-of-the-person/)
